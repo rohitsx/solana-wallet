@@ -14,7 +14,6 @@ function App() {
   }, [])
 
   const [publicKey, setPublicKey] = useState<string>(keyPair.publicKey.toString())
-  const [balance, setBlance] = useState<number>(0)
 
   async function getBlance(e: React.FormEvent) {
     e.preventDefault();
