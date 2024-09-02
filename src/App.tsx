@@ -1,43 +1,20 @@
-import React, { useMemo, useState } from 'react'
-import { Keypair, Connection, PublicKey, clusterApiUrl } from '@solana/web3.js'
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import SolanaBalanceChecker from './assets/getBalance';
+import LandingPage from './assets/landingPage';
 import './App.css'
-
 function App() {
-  const connection = useMemo(() => {
-    const connectionInstance = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
-    return connectionInstance;
-  }, [])
-
-  const keyPair = useMemo(() => {
-    const keypair = Keypair.generate();
-    return keypair
-  }, [])
-
-  const [publicKey, setPublicKey] = useState<string>(keyPair.publicKey.toString())
-
-  async function getBlance(e: React.FormEvent) {
-    e.preventDefault();
-    try {
-      const publicKeyInstance = new PublicKey(publicKey);
-      const balance = await connection.getBalance(publicKeyInstance);
-      console.log(`Balance: ${balance / 1e9} SOL`);
-    } catch (error) {
-      console.error("Error fetching balance:", error);
-    }
-  }
-
-  return <div>
-    <div>publickey: {keyPair.publicKey.toString()}</div>
-    <div>
-
-    </div>
-    <div>
-      <form onSubmit={getBlance}>
-        <input type="text" onChange={(e) => setPublicKey(e.target.value)} />
-        <button>Get Balance</button>
-      </form>
-    </div>
-  </div>
+  React.useEffect(() => { }, [])
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/get-balance" element={<SolanaBalanceChecker />} />
+        {/* <Route path="/get-transaction" element={<GetTransaction />} /> */}
+        {/* <Route path="/send-solana" element={<SendSolana />} /> */}
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

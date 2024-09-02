@@ -1,29 +1,38 @@
 {
-  "hash": "2b6d7899",
+  "hash": "ec8f3b2b",
   "configHash": "5531a1ae",
-  "lockfileHash": "48398426",
-  "browserHash": "dc363c6f",
+  "lockfileHash": "94caca19",
+  "browserHash": "5aa90652",
   "optimized": {
     "react": {
       "src": "../../node_modules/react/index.js",
       "file": "react.js",
-      "fileHash": "1ee04005",
+      "fileHash": "981503c3",
       "needsInterop": true
     },
     "react-dom/client": {
       "src": "../../node_modules/react-dom/client.js",
       "file": "react-dom_client.js",
-      "fileHash": "5546cb85",
+      "fileHash": "d316cbc9",
       "needsInterop": true
     },
     "@solana/web3.js": {
       "src": "../../node_modules/@solana/web3.js/lib/index.browser.esm.js",
       "file": "@solana_web3__js.js",
-      "fileHash": "1a1d77c3",
+      "fileHash": "3e3985cf",
+      "needsInterop": false
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "8a28e268",
       "needsInterop": false
     }
   },
   "chunks": {
+    "chunk-UHINIFCJ": {
+      "file": "chunk-UHINIFCJ.js"
+    },
     "chunk-W4EHDCLL": {
       "file": "chunk-W4EHDCLL.js"
     },
