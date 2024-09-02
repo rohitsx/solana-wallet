@@ -1,2 +1,2 @@
-# solana-wallet
-SImple solana wallet to send recive lamport and view trascation.
+# Solana-wallet
+Simple Solana wallet to send receive Lamport and view transactions.
