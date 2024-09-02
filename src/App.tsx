@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useMemo, useState } from 'react'
+import { Keypair, Connection, PublicKey, clusterApiUrl } from '@solana/web3.js'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const connection = useMemo(() => {
+    const connectionInstance = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
+    return connectionInstance;
+  }, [])
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  const keyPair = useMemo(() => {
+    const keypair = Keypair.generate();
+    return keypair
+  }, [])
+
+  const [publicKey, setPublicKey] = useState<string>(keyPair.publicKey.toString())
+  const [balance, setBlance] = useState<number>(0)
+
+  async function getBlance(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      const publicKeyInstance = new PublicKey(publicKey);
+      const balance = await connection.getBalance(publicKeyInstance);
+      console.log(`Balance: ${balance / 1e9} SOL`);
+    } catch (error) {
+      console.error("Error fetching balance:", error);
+    }
+  }
+
+  return <div>
+    <div>publickey: {keyPair.publicKey.toString()}</div>
+    <div>
+
+    </div>
+    <div>
+      <form onSubmit={getBlance}>
+        <input type="text" onChange={(e) => setPublicKey(e.target.value)} />
+        <button>Get Balance</button>
+      </form>
+    </div>
+  </div>
 }
 
 export default App
